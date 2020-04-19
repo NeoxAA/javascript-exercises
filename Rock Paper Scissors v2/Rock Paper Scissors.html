@@ -1,0 +1,41 @@
+<script>
+let playerWon = 0;
+let computerWon = 0;
+function game() {
+    for (let theRound = 0; theRound < 5; theRound++) {
+        const playerSelection = prompt("Enter your choice:")
+        const computerPlay = ["rock", "paper", "scissors"]
+        const caseSensitive = playerSelection[0].toLowerCase() + playerSelection.slice(1);
+        const computerSelection = computerPlay[Math.floor(Math.random()*computerPlay.length)]
+        function playRound(caseSensitive, computerSelect) {
+            if (caseSensitive == computerSelect) {
+                return "Its a tie!"
+            }
+            else if (caseSensitive == 'paper' && computerSelect != 'scissors') {
+                playerWon++;
+                return "Player wins!"
+            }
+            else if (caseSensitive == 'rock' && computerSelect != "paper") {
+                playerWon++;
+                return "Player wins!"
+            }
+            else if (caseSensitive == 'scissors' && computerSelect != "rock"){
+                playerWon++;
+                return "Player wins!"
+            }
+            else {
+                computerWon++;
+                return "Computer wins!"
+            }
+        }
+    alert(playRound(caseSensitive, computerSelection));
+    }
+}
+game();
+if (playerWon > computerWon) {
+    alert("Player has won with " + playerWon + " wins.")
+}
+else {
+    alert("Computer has won with " + computerWon + " wins." )
+}
+</script>
