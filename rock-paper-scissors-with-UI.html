@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <style>
+      ul {
+        list-style: none;
+      }
+      button.w3-button.w3-border.w3-hover-green {
+        margin-left: 15px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      .two {
+        width: 25em;
+        max-width: 100%;
+      }
+      .two span {
+        display: inline-block;
+        max-width: 50%;
+      }
+      .playertwo:nth-child(1) {
+        float: left;
+      }
+      .computertwo:nth-child(2) {
+        float: right;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="w3-container">
+      <center>
+        <h1>Rock Paper Scissors Game</h1>
+      </center>
+    </div>
+    <div id="buttons" class="w3-container">
+      <center>
+        <ul>
+          <li>
+            <button class="w3-button w3-border w3-hover-green" id="rock">
+              Rock
+            </button>
+            <button class="w3-button w3-border w3-hover-green" id="paper">
+              Paper
+            </button>
+            <button class="w3-button w3-border w3-hover-green" id="scissors">
+              Scissors
+            </button>
+          </li>
+        </ul>
+      </center>
+    </div>
+    <center>
+      <div id="results" class="two">
+        <span class="playertwo">Player Wins:</span>
+        <span class="countPlayerWins"></span>
+        <span class="computertwo">Computer Wins:</span>
+        <span class="countComputerWins"></span>
+      </div>
+    </center>
+  </body>
+</html>
+<script>
+  playerWins = 0;
+  computerWins = 0;
+  const buttons = document.querySelectorAll("button");
+
+  var playerScoreNode = document.createElement("span");
+  var computerScoreNode = document.createElement("span");
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      playerScoreNode.textContent = playerWins;
+      computerScoreNode.textContent = computerWins;
+      var playerWinsNode = document.querySelector("#results > span");
+      var computerWinsNode = document.querySelector(
+        "#results > span.countComputerWins"
+      );
+
+      playerWinsNode.appendChild(playerScoreNode);
+      computerWinsNode.appendChild(computerScoreNode);
+    });
+  });
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      theChoice = button.id;
+      const computerPlay = ["rock", "paper", "scissors"];
+      const computerChoice =
+        computerPlay[Math.floor(Math.random() * computerPlay.length)];
+      function playRound(theChoice, computerChoice) {
+        if (theChoice == computerChoice) {
+          console.log("It's a tie!");
+        } else if (theChoice == "paper" && computerChoice != "scissors") {
+          console.log("Player Wins");
+          playerWins++;
+        } else if (theChoice == "rock" && computerChoice != "paper") {
+          console.log("Player Wins");
+          playerWins++;
+        } else if (theChoice == "scissors" && computerChoice != "rock") {
+          console.log("Player Wins");
+          playerWins++;
+        } else {
+          console.log("Computer Wins");
+          computerWins++;
+        }
+      }
+
+      window.addEventListener("click", playRound(theChoice, computerChoice));
+    });
+  });
+</script>
